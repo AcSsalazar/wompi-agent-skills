@@ -208,7 +208,7 @@ class WompiWebhookController extends Controller
     {
         $body = $request->all();
 
-        if (!$this->validateSignature($body, env('WOMPI_EVENTS_SECRET'))) {
+        if (!$this->validateSignature($body, config('services.wompi.events_secret'))) {
             Log::warning('Invalid Wompi webhook signature', ['ip' => $request->ip()]);
             return response()->json(['error' => 'Invalid signature'], 401);
         }
